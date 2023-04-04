@@ -1,25 +1,25 @@
 /*----- constants -----*/
 const wordBank = [
-  'asteroid',
-  'comet',
-  'nebula',
-  'orbit',
-  'planet',
-  'meteor',
-  'star',
-  'moon',
-  'galaxy',
-  'telescope',
-  'cosmic',
-  'cosmos',
-  'gravity',
-  'universe',
-  'alien',
-  'eclipse',
-  'horizon',
-  'exploration',
-  'interstellar',
-  'constellation',
+  'ASTEROID',
+  'COMET',
+  'NEBULA',
+  'ORBIT',
+  'PLANET',
+  'METEOR',
+  'STAR',
+  'MOON',
+  'GALAXY',
+  'TELESCOPE',
+  'COSMIC',
+  'COSMOS',
+  'GRAVITY',
+  'UNIVERSE',
+  'ALIEN',
+  'ECLIPSE',
+  'HORIZON',
+  'EXPLORATION',
+  'INTERSTELLAR',
+  'CONSTELLATION',
 ];
 const alphabet = [
   'A',
@@ -96,6 +96,9 @@ function renderAlphabet() {
     if (alphabet[idx] === '') {
       div.style.backgroundColor = 'red';
     }
+    if (alphabet[idx].endsWith(' ')) {
+      div.style.backgroundColor = 'green';
+    }
   });
 }
 
@@ -104,6 +107,7 @@ function renderSecredWordDiv() {
 
   while (len > 0) {
     const newDiv = document.createElement('div');
+    newDiv.setAttribute('id', 'secretLetter');
     secretWordContainer.appendChild(newDiv);
     len--;
   }
@@ -116,10 +120,41 @@ function renderMainInfo() {
   messageBox.innerText = message;
 }
 
-//CONTROLLER FUNCTIONS
+//Controller Functions and Helpers
 
 function performGameLogic(e) {
   if (e.target.tagName !== 'DIV') return;
   const eventTarget = e.target;
+  console.dir(eventTarget);
+
+  isCorrectGuess(eventTarget);
   render();
 }
+
+function isCorrectGuess(e) {
+  const secretLetter = document.querySelectorAll('#secretLetter');
+  console.log('CorrectGuess');
+  for (let i = 0; i < secretWord.length; i++) {
+    let letter = secretWord[i];
+    let idx = alphabet.indexOf(letter);
+    if (letter === e.textContent) {
+      secretLetter[i].innerText = letter;
+      alphabet[idx] += ' ';
+      return;
+    }
+  }
+  fuelCapacity--;
+  let idx = alphabet.indexOf(e.textContent);
+  alphabet[idx] = '';
+}
+
+// function
+
+tsParticles
+  .loadJSON('tsparticles', 'options.json')
+  .then((container) => {
+    console.log('callback - tsparticles config loaded');
+  })
+  .catch((error) => {
+    console.error(error);
+  });
