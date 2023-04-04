@@ -1,78 +1,109 @@
 /*----- constants -----*/
 const wordBank = [
-  "asteroid",
-  "comet",
-  "nebula",
-  "orbit",
-  "planet",
-  "meteor",
-  "star",
-  "moon",
-  "galaxy",
-  "telescope",
-  "cosmic",
-  "cosmos",
-  "gravity",
-  "universe",
-  "alien",
-  "eclipse",
-  "horizon",
-  "exploration",
-  "interstellar",
-  "constellation"
+  'asteroid',
+  'comet',
+  'nebula',
+  'orbit',
+  'planet',
+  'meteor',
+  'star',
+  'moon',
+  'galaxy',
+  'telescope',
+  'cosmic',
+  'cosmos',
+  'gravity',
+  'universe',
+  'alien',
+  'eclipse',
+  'horizon',
+  'exploration',
+  'interstellar',
+  'constellation',
 ];
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+const alphabet = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+];
 
 /*----- state variables -----*/
 let secretWord;
 let playerCurrentGuess;
-let numberOfGuesses;
-
+let fuelCapacity;
+let message;
 
 /*----- cached elements  -----*/
 const letterDivs = document.querySelectorAll('#alphabet div');
 const secretWordContainer = document.getElementById('secretWordContainer');
-
+const fuelCapacityEl = document.getElementById('fuel-number');
+const messageBox = document.getElementById('message');
 /*----- event listeners -----*/
-
 
 /*----- functions -----*/
 initialize();
-
 
 // Initialize and Initialize Helpers
 function initialize() {
   secretWord = chooseSecretWord();
   playerCurrentGuess = '';
-  numberOfGuesses = 0;
+  fuelCapacity = 10;
+  message = 'Guess the word correctly to make it home!';
 }
 
 function chooseSecretWord() {
   return wordBank[Math.floor(Math.random() * wordBank.length)];
 }
 
-
 // Render and Render Helpers
 function render() {
-  createAlphabet();
-  createSecredWordDiv()
+  renderAlphabet();
+  renderSecredWordDiv();
 }
 
-function createAlphabet() {
-  letterDivs.forEach((div, idx) => { 
-    div.innerText = alphabet[idx]
+function renderAlphabet() {
+  letterDivs.forEach((div, idx) => {
+    div.innerText = alphabet[idx];
     if (alphabet[idx] === '') {
-      div.style.backgroundColor = 'red'
+      div.style.backgroundColor = 'red';
     }
   });
 }
 
-function createSecredWordDiv() {
+function renderSecredWordDiv() {
   let len = secretWord.length;
-  
-  while(len > 0) {
-    const newDiv = document.createElement("div")
+
+  while (len > 0) {
+    const newDiv = document.createElement('div');
     secretWordContainer.appendChild(newDiv);
-    len --;
+    len--;
   }
+}
+
+function renderMainInfo() {
+  fuelCapacityEl.innerText = fuelCapacity;
+  messageBox.innerText = message;
 }
