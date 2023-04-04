@@ -62,6 +62,7 @@ const letterDivs = document.querySelectorAll('#alphabet div');
 const secretWordContainer = document.getElementById('secretWordContainer');
 const fuelCapacityEl = document.getElementById('fuel-number');
 const messageBox = document.getElementById('message');
+const rocket = document.getElementById('rocket');
 /*----- event listeners -----*/
 document.getElementById('alphabet').addEventListener('click', performGameLogic);
 
@@ -124,6 +125,7 @@ function renderMainInfo() {
 
 function performGameLogic(e) {
   if (e.target.tagName !== 'DIV') return;
+  if (e.target.style.backgroundColor !== '') return;
   const eventTarget = e.target;
   console.dir(eventTarget);
 
@@ -133,19 +135,33 @@ function performGameLogic(e) {
 
 function isCorrectGuess(e) {
   const secretLetter = document.querySelectorAll('#secretLetter');
-  console.log('CorrectGuess');
+  console.log(secretWord);
+  let isCorrect = false;
   for (let i = 0; i < secretWord.length; i++) {
     let letter = secretWord[i];
     let idx = alphabet.indexOf(letter);
     if (letter === e.textContent) {
       secretLetter[i].innerText = letter;
       alphabet[idx] += ' ';
-      return;
+      message = 'Nice Guess!';
+      isCorrect = true;
     }
   }
-  fuelCapacity--;
-  let idx = alphabet.indexOf(e.textContent);
-  alphabet[idx] = '';
+
+  if (!isCorrect) {
+    rotateRocket();
+    fuelCapacity--;
+    let idx = alphabet.indexOf(e.textContent);
+    alphabet[idx] = '';
+    message = 'Try again!';
+  }
+}
+
+function rotateRocket() {
+  rocket.classList.add('rocket-flip');
+  setTimeout(function () {
+    rocket.classList.remove('rocket-flip');
+  }, 1000);
 }
 
 // function
