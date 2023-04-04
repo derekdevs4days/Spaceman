@@ -21,7 +21,7 @@ const wordBank = [
   'INTERSTELLAR',
   'CONSTELLATION',
 ];
-const alphabet = [
+let alphabet = [
   'A',
   'B',
   'C',
@@ -64,8 +64,10 @@ const secretWordContainer = document.getElementById('secretWordContainer');
 const fuelCapacityEl = document.getElementById('fuel-number');
 const messageBox = document.getElementById('message');
 const rocket = document.getElementById('rocket');
+const button = document.querySelector('button');
 /*----- event listeners -----*/
 document.getElementById('alphabet').addEventListener('click', performGameLogic);
+button.addEventListener('click', restartGame);
 
 /*----- functions -----*/
 initialize();
@@ -76,7 +78,8 @@ function initialize() {
   isSecretWordDivCreated = false;
   playerGuess = 0;
   fuelCapacity = 8;
-  message = 'Guess the word correctly to make it home!';
+  message =
+    'Guess the word correctly to make it home!\n (The word is space themed!)';
   render();
 }
 
@@ -125,7 +128,6 @@ function renderMainInfo() {
 //Controller Functions and Helpers
 
 function performGameLogic(e) {
-  console.log(playerGuess);
   if (e.target.tagName !== 'DIV') return;
   if (e.target.style.backgroundColor !== '') return;
   const eventTarget = e.target;
@@ -166,6 +168,7 @@ function checkWinner() {
       .getElementById('alphabet')
       .removeEventListener('click', performGameLogic);
     dropRocket();
+    revealButton();
   }
 
   if (playerGuess === secretWord.length) {
@@ -175,7 +178,12 @@ function checkWinner() {
     document
       .getElementById('alphabet')
       .removeEventListener('click', performGameLogic);
+    revealButton();
   }
+}
+
+function revealButton() {
+  button.classList.remove('hidden');
 }
 
 function rotateRocket() {
@@ -188,13 +196,15 @@ function rotateRocket() {
 function dropRocket() {
   rocket.classList.add('rocket-fall');
 }
+
+function restartGame() {
+  location.reload();
+}
 //PARTICLES
 
 tsParticles
   .loadJSON('tsparticles', 'options.json')
-  .then((container) => {
-    console.log('callback - tsparticles config loaded');
-  })
+  .then((container) => {})
   .catch((error) => {
     console.error(error);
   });

@@ -28,7 +28,9 @@ body {
   z-index: -2;
 }
 
-main {
+header {
+  font-size: 1.5rem;
+  color: rgb(84, 84, 125);
 }
 
 .flex-container {
@@ -54,7 +56,7 @@ main {
 
 #letter {
   border: 2px solid rgb(73, 71, 76);
-  background-color: rgba(55, 53, 67, 0.36);
+  background-color: #373543;
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -76,6 +78,22 @@ main {
 #fuel {
   margin-bottom: 10px;
   font-size: 3rem;
+}
+button {
+  border: 3px solid rgb(57, 60, 66);
+  color: rgb(211, 211, 211);
+  font-size: 1.25rem;
+  background-color: rgba(84, 84, 125, 0.715);
+  padding: 1vmin 2vmin;
+  border-radius: 10px;
+  margin-bottom: 2vmin;
+}
+button:hover {
+  background-color: rgb(67, 67, 107);
+}
+
+.hidden {
+  display: none;
 }
 
 #message {
@@ -125,7 +143,6 @@ main {
   border-radius: 8px;
   width: 12vmin;
   height: 12vmin;
-color: #2c262635
   transition-duration: 300ms;
 }
 
