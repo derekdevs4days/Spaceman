@@ -1,4 +1,4 @@
-/*----- constants -----*/
+/*----- CONSTANTS -----*/
 const wordBank = [
   'ASTEROID',
   'COMET',
@@ -50,14 +50,14 @@ let alphabet = [
   'Z',
 ];
 
-/*----- state variables -----*/
+/*----- STATE VARIABLES -----*/
 let secretWord;
 let isSecretWordDivCreated;
 let playerGuess;
 let fuelCapacity;
 let message;
 
-/*----- cached elements  -----*/
+/*----- CACHED ELEMENTS  -----*/
 const earth = document.getElementById('earth');
 const letterDivs = document.querySelectorAll('#alphabet div');
 const secretWordContainer = document.getElementById('secretWordContainer');
@@ -65,14 +65,14 @@ const fuelCapacityEl = document.getElementById('fuel-number');
 const messageBox = document.getElementById('message');
 const rocket = document.getElementById('rocket');
 const button = document.querySelector('button');
-/*----- event listeners -----*/
+
+/*----- EVENT LISTENER -----*/
 document.getElementById('alphabet').addEventListener('click', performGameLogic);
 button.addEventListener('click', restartGame);
 
-/*----- functions -----*/
+/*----- INITIALIZE AND INITIALIZE HELPERS -----*/
 initialize();
 
-// Initialize and Initialize Helpers
 function initialize() {
   secretWord = chooseSecretWord();
   isSecretWordDivCreated = false;
@@ -87,7 +87,8 @@ function chooseSecretWord() {
   return wordBank[Math.floor(Math.random() * wordBank.length)];
 }
 
-// Render and Render Helpers
+/*----- RENDER AND RENDER HELPERS -----*/
+
 function render() {
   renderAlphabet();
   if (!isSecretWordDivCreated) renderSecredWordDiv();
@@ -125,7 +126,7 @@ function renderMainInfo() {
   messageBox.innerText = message;
 }
 
-//Controller Functions and Helpers
+/*----- CONTROLLER FUNCTIONS AND HELPERS -----*/
 
 function performGameLogic(e) {
   if (e.target.tagName !== 'DIV') return;
@@ -172,7 +173,7 @@ function checkWinner() {
   }
 
   if (playerGuess === secretWord.length) {
-    message = 'Well done captain!';
+    message = 'Well done commander!';
     earth.style.backgroundImage = 'url(assets/earth.jpg)';
     earth.style.opacity = 1;
     document
@@ -200,7 +201,8 @@ function dropRocket() {
 function restartGame() {
   location.reload();
 }
-//PARTICLES
+
+/*-----PARTICLES -----*/
 
 tsParticles
   .loadJSON('tsparticles', 'options.json')
