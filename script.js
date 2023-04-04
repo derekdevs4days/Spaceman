@@ -52,6 +52,7 @@ const alphabet = [
 
 /*----- state variables -----*/
 let secretWord;
+let isSecretWordDivCreated;
 let playerCurrentGuess;
 let fuelCapacity;
 let message;
@@ -62,6 +63,7 @@ const secretWordContainer = document.getElementById('secretWordContainer');
 const fuelCapacityEl = document.getElementById('fuel-number');
 const messageBox = document.getElementById('message');
 /*----- event listeners -----*/
+document.getElementById('alphabet').addEventListener('click', performGameLogic);
 
 /*----- functions -----*/
 initialize();
@@ -69,9 +71,12 @@ initialize();
 // Initialize and Initialize Helpers
 function initialize() {
   secretWord = chooseSecretWord();
+  isSecretWordDivCreated = false;
   playerCurrentGuess = '';
   fuelCapacity = 10;
   message = 'Guess the word correctly to make it home!';
+
+  render();
 }
 
 function chooseSecretWord() {
@@ -81,7 +86,7 @@ function chooseSecretWord() {
 // Render and Render Helpers
 function render() {
   renderAlphabet();
-  renderSecredWordDiv();
+  if (!isSecretWordDivCreated) renderSecredWordDiv();
   renderMainInfo();
 }
 
@@ -102,9 +107,19 @@ function renderSecredWordDiv() {
     secretWordContainer.appendChild(newDiv);
     len--;
   }
+
+  isSecretWordDivCreated = true;
 }
 
 function renderMainInfo() {
   fuelCapacityEl.innerText = fuelCapacity;
   messageBox.innerText = message;
+}
+
+//CONTROLLER FUNCTIONS
+
+function performGameLogic(e) {
+  if (e.target.tagName !== 'DIV') return;
+  const eventTarget = e.target;
+  render();
 }
