@@ -59,6 +59,23 @@ main {
   border-radius: 10px;
 }
 
+.rocket {
+  width: 60vmin;
+  rotate: 90deg;
+  animation: float 3s infinite ease-in-out;
+}
+@keyframes float {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
 /* SECRET WORD */
 
 #secretWordContainer {

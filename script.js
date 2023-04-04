@@ -82,6 +82,7 @@ function chooseSecretWord() {
 function render() {
   renderAlphabet();
   renderSecredWordDiv();
+  renderMainInfo();
 }
 
 function renderAlphabet() {
