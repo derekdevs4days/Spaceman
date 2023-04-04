@@ -39,6 +39,8 @@ const secretWordContainer = document.getElementById('secretWordContainer');
 /*----- functions -----*/
 initialize();
 
+
+// Initialize and Initialize Helpers
 function initialize() {
   secretWord = chooseSecretWord();
   playerCurrentGuess = '';
@@ -49,6 +51,8 @@ function chooseSecretWord() {
   return wordBank[Math.floor(Math.random() * wordBank.length)];
 }
 
+
+// Render and Render Helpers
 function render() {
   createAlphabet();
   createSecredWordDiv()
