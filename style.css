@@ -5,10 +5,27 @@
 
 body {
   box-sizing: border-box;
+  position: relative;
   height: 100vh;
   padding: 3rem;
-  background-color: grey;
+  color: rgb(211, 211, 211);
+  background-color: rgb(0, 0, 0);
   font-family: 'Space Mono', monospace;
+  overflow: hidden;
+}
+
+#earth {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 3s ease-in-out; /* add transition for opacity */
+
+  z-index: -2;
 }
 
 main {
@@ -23,7 +40,8 @@ main {
 
 /* ALPHABET INTERFACE */
 #alphabet {
-  border: 1px solid black;
+  border: 4px solid rgb(57, 60, 66);
+  background-color: #1d1f24;
   border-radius: 10px;
   padding: 1rem;
   width: 20%;
@@ -35,11 +53,17 @@ main {
 }
 
 #letter {
-  border: 1px solid black;
+  border: 2px solid rgb(73, 71, 76);
+  background-color: rgba(55, 53, 67, 0.36);
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition-duration: 300ms;
+}
+
+#letter:hover {
+  background-color: rgba(169, 169, 169, 0.194);
 }
 
 /* MAIN INFO */
@@ -51,10 +75,14 @@ main {
 
 #fuel {
   margin-bottom: 10px;
+  font-size: 3rem;
 }
 
 #message {
-  border: 1px solid black;
+  border: 5px solid rgb(57, 60, 66);
+  background-color: rgba(42, 40, 50, 0.814);
+
+  font-size: 1.25rem;
   width: 50%;
   padding: 3vmin 0;
   text-align: center;
@@ -71,6 +99,41 @@ main {
   animation: rotation 1s infinite;
 }
 
+.rocket-fall {
+  rotate: 100deg;
+  animation: fall 5s forwards;
+}
+
+/* SECRET WORD */
+
+#secretWordContainer {
+  display: flex;
+  gap: 2vmin;
+  justify-content: center;
+}
+
+#secretWordContainer div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+
+  border: 4px solid rgb(57, 60, 66);
+  background-color: rgba(55, 53, 67, 0.36);
+
+  border-radius: 8px;
+  width: 12vmin;
+  height: 12vmin;
+color: #2c262635
+  transition-duration: 300ms;
+}
+
+#secretWordContainer div:hover {
+  background-color: rgba(72, 69, 79, 0.467);
+  transform: scale(1.1);
+}
+/* KEYFRAMES */
 @keyframes float {
   0% {
     transform: translateX(0px);
@@ -92,22 +155,20 @@ main {
   }
 }
 
-/* SECRET WORD */
-
-#secretWordContainer {
-  display: flex;
-  gap: 2vmin;
-  justify-content: center;
+@keyframes fall {
+  from {
+    transform: translate(0px, 0px);
+  }
+  to {
+    transform: translate(600px, -900px);
+  }
 }
 
-#secretWordContainer div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 3rem;
-
-  border: 1px solid black;
-  border-radius: 8px;
-  width: 12vmin;
-  height: 12vmin;
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

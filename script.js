@@ -53,11 +53,12 @@ const alphabet = [
 /*----- state variables -----*/
 let secretWord;
 let isSecretWordDivCreated;
-let playerCurrentGuess;
+let playerGuess;
 let fuelCapacity;
 let message;
 
 /*----- cached elements  -----*/
+const earth = document.getElementById('earth');
 const letterDivs = document.querySelectorAll('#alphabet div');
 const secretWordContainer = document.getElementById('secretWordContainer');
 const fuelCapacityEl = document.getElementById('fuel-number');
@@ -73,10 +74,9 @@ initialize();
 function initialize() {
   secretWord = chooseSecretWord();
   isSecretWordDivCreated = false;
-  playerCurrentGuess = '';
-  fuelCapacity = 10;
+  playerGuess = 0;
+  fuelCapacity = 8;
   message = 'Guess the word correctly to make it home!';
-
   render();
 }
 
@@ -95,10 +95,10 @@ function renderAlphabet() {
   letterDivs.forEach((div, idx) => {
     div.innerText = alphabet[idx];
     if (alphabet[idx] === '') {
-      div.style.backgroundColor = 'red';
+      div.style.backgroundColor = '#2c262635';
     }
     if (alphabet[idx].endsWith(' ')) {
-      div.style.backgroundColor = 'green';
+      div.style.backgroundColor = '#00f0006d';
     }
   });
 }
@@ -118,24 +118,25 @@ function renderSecredWordDiv() {
 
 function renderMainInfo() {
   fuelCapacityEl.innerText = fuelCapacity;
+  if (fuelCapacity < 3) fuelCapacityEl.style.color = 'red';
   messageBox.innerText = message;
 }
 
 //Controller Functions and Helpers
 
 function performGameLogic(e) {
+  console.log(playerGuess);
   if (e.target.tagName !== 'DIV') return;
   if (e.target.style.backgroundColor !== '') return;
   const eventTarget = e.target;
-  console.dir(eventTarget);
-
-  isCorrectGuess(eventTarget);
+  checkCorrectGuess(eventTarget);
+  checkWinner();
   render();
 }
 
-function isCorrectGuess(e) {
+function checkCorrectGuess(e) {
   const secretLetter = document.querySelectorAll('#secretLetter');
-  console.log(secretWord);
+
   let isCorrect = false;
   for (let i = 0; i < secretWord.length; i++) {
     let letter = secretWord[i];
@@ -143,6 +144,7 @@ function isCorrectGuess(e) {
     if (letter === e.textContent) {
       secretLetter[i].innerText = letter;
       alphabet[idx] += ' ';
+      playerGuess++;
       message = 'Nice Guess!';
       isCorrect = true;
     }
@@ -157,6 +159,25 @@ function isCorrectGuess(e) {
   }
 }
 
+function checkWinner() {
+  if (fuelCapacity < 1) {
+    message = 'Mission Failed.';
+    document
+      .getElementById('alphabet')
+      .removeEventListener('click', performGameLogic);
+    dropRocket();
+  }
+
+  if (playerGuess === secretWord.length) {
+    message = 'Well done captain!';
+    earth.style.backgroundImage = 'url(assets/earth.jpg)';
+    earth.style.opacity = 1;
+    document
+      .getElementById('alphabet')
+      .removeEventListener('click', performGameLogic);
+  }
+}
+
 function rotateRocket() {
   rocket.classList.add('rocket-flip');
   setTimeout(function () {
@@ -164,7 +185,10 @@ function rotateRocket() {
   }, 1000);
 }
 
-// function
+function dropRocket() {
+  rocket.classList.add('rocket-fall');
+}
+//PARTICLES
 
 tsParticles
   .loadJSON('tsparticles', 'options.json')
