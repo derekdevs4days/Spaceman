@@ -164,7 +164,7 @@ function checkCorrectGuess(e) {
 
 function checkWinner() {
   if (fuelCapacity < 1) {
-    message = 'Mission Failed.';
+    message = `Mission Failed. \n${secretWord} was the word.`;
     document
       .getElementById('alphabet')
       .removeEventListener('click', performGameLogic);
