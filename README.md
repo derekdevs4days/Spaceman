@@ -1,14 +1,17 @@
-# Spaceman
+## Spaceman
 
  Take command and bring your crew home safely in this space-themed hangman game.
 
-![](https://github.com/derekdevs4days/Spaceman/blob/main/assets/cover.png)
+![](https://github.com/derekdevs4days/Spaceman/blob/main/assets/spaceman.gif)
 
-**Technologies Used**: JavaScript, HTML, CSS
+## Technologies Used:
+JavaScript, HTML, CSS
 
-**Getting Started**: https://derekdevs4days.github.io/Spaceman/
+## Getting Started: 
+Click here to play! https://derekdevs4days.github.io/Spaceman/
 
-**Next Steps**:
+## Next Steps:
 
 - Option to choose different word banks.
 - Option to choose rocket color.
+- Keyboard binding
