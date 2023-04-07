@@ -109,7 +109,7 @@ button:hover {
 
 .rocket {
   width: 60vmin;
-  rotate: 90deg;
+  rotate: 15deg;
   animation: float 3s infinite ease-in-out;
 }
 
@@ -118,7 +118,7 @@ button:hover {
 }
 
 .rocket-fall {
-  rotate: 100deg;
+  rotate: 30deg;
   animation: fall 5s forwards;
 }
 
@@ -153,13 +153,13 @@ button:hover {
 /* KEYFRAMES */
 @keyframes float {
   0% {
-    transform: translateX(0px);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateX(30px);
+    transform: translateY(50px);
   }
   100% {
-    transform: translateX(0px);
+    transform: translateY(0px);
   }
 }
 
@@ -177,6 +177,6 @@ button:hover {
     transform: translate(0px, 0px);
   }
   to {
-    transform: translate(600px, -900px);
+    transform: translate(1500px, 300px);
   }
 }
