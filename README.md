@@ -2,7 +2,7 @@
 
  Take command and bring your crew home safely in this space-themed hangman game.
 
-![](https://github.com/derekdevs4days/Spaceman/blob/main/assets/spaceman.gif)
+![](https://github.com/derekdevs4days/Spaceman/blob/main/assets/cover.png)
 
 ## Technologies Used:
 JavaScript, HTML, CSS
